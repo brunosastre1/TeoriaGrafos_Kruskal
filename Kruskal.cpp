@@ -16,6 +16,10 @@
 void imprimir_logo(FILE *impArq);
 
 int main() {
+
+    int nv //nro de vertices
+    ,i,j;
+    
  
     //Impressao logo  
     char *nome_arquivo = "imagem.txt";
@@ -32,7 +36,15 @@ int main() {
     fclose(impArq);
     printf("\n");
     
+    //Obtencao dos vertices
+    printf("\nDigite a quantidade de vertices:");
+    scanf("%d", &nv);
     
+    //Obtencao da matriz de adjacencia
+    printf("\nDigite os valores da Matriz de Adjacencia:\n");
+    
+    
+ 
 
 	system("pause");
 }
