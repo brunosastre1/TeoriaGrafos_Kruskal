@@ -1,7 +1,7 @@
  /**************************************************************************************************************************
  * Programa: Kruskal	
  * 
- * Descriçao:  Programa que implementa o algoritmo de Kruskall para resolver o "Problema da árvore geradora de custo mínimo". 
+ * Descriçao:  Programa que implementa o algoritmo de Kruskall para resolver o "Problema da árvore geradora de m mínimo". 
  *
  * Autores:  Bruno Sastre     Felipe Aversoni
  * TIA:      41316861         41313038 
@@ -18,7 +18,8 @@ void imprimir_logo(FILE *impArq);
 int main() {
 
     int nv //nro de vertices
-    ,i,j;
+    m[150][150],i,j;
+    
     
  
     //Impressao logo  
@@ -42,8 +43,14 @@ int main() {
     
     //Obtencao da matriz de adjacencia
     printf("\nDigite os valores da Matriz de Adjacencia:\n");
-    
-    
+    for(i=1;i<=nv;i++){
+       for(j=1;j<=nv;j++){
+            scanf("%d", &m[i][j]);
+            if(m[i][j]==0){
+               m[i][j]==999;           
+               }
+               }
+    }                       
  
 
 	system("pause");
@@ -56,3 +63,12 @@ int main() {
     while(fgets(read_string,sizeof(read_string),impArq) != NULL)
         printf("%s",read_string);
     }
+    
+    //devolve o chefe da árvore de F que contém o vértice v.
+    int find(int i){
+        while(pai[i])
+        i=pai[i];
+        return i;
+    }
+
+    
