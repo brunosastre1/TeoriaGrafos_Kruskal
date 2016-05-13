@@ -14,13 +14,13 @@
 #define TAM_MAXIMO 128
 
 void imprimir_logo(FILE *impArq);
-
+int find(int i);
+int unioon(int i, int j);
+int nrv, //nro de vertices
+    m[200][200], pai[200], min=999, nra, i, j, find1, unioon1, a1,b1, customin=0;
+    
+    
 int main() {
-
-    int nv //nro de vertices
-    m[150][150],i,j;
-    
-    
  
     //Impressao logo  
     char *nome_arquivo = "imagem.txt";
@@ -39,20 +39,44 @@ int main() {
     
     //Obtencao dos vertices
     printf("\nDigite a quantidade de vertices:");
-    scanf("%d", &nv);
+    scanf("%d", &nrv);
     
     //Obtencao da matriz de adjacencia
     printf("\nDigite os valores da Matriz de Adjacencia:\n");
-    for(i=1;i<=nv;i++){
-       for(j=1;j<=nv;j++){
+    for(i=1;i<=nrv;i++){
+       for(j=1;j<=nrv;j++){
             scanf("%d", &m[i][j]);
             if(m[i][j]==0){
                m[i][j]==999;           
                }
                }
     }                       
- 
-
+    
+    //Arestas da Arvore Geradora de Custo Minimo
+    printf("\nAs arestas da AGCM sao:\n");
+    nra=1;
+    while(nra<nrv){
+         for(i=1;i<=nrv;i++){
+            for(j=1;j<=nrv;j++){
+               if(m[i][j] < min){
+                  min = m[i][j];
+                  a1=find1=i;
+                  b1=unioon1=j;
+               }
+            }
+         } 
+      //uniao dos caminhos   
+     find1=find(find1);
+     unioon1=find(unioon1);
+     
+          if(unioon(find1,unioon1)){
+             printf("\n%d aresta (%d,%d) = %d\n",nra++,a1,b1,min);
+             customin +=min;
+             }
+             m[a1][b1] = m[b1][a1]=999;
+     }                       
+     printf("\nO Custo minimo eh de %d\n", customin);
+     
 	system("pause");
 }
 
@@ -71,4 +95,11 @@ int main() {
         return i;
     }
 
+    int unioon(int i,int j){
+	if(i!=j){
+		pai[j]=i;
+		return 1;
+	}
+	return 0;
+    }
     
