@@ -17,15 +17,16 @@ void imprimir_logo(FILE *impArq);
 int find(int i);
 int unioon(int i, int j);
 int nrv, //nro de vertices
-    m[200][200], pai[200], min=999, nra, i, j, find1, unioon1, a1,b1, customin=0;
+    m[200][200], pai[200], min, nra=1, i, j, find1, unioon1, a1,b1, customin=0;
     
     
 int main() {
  
     //Impressao logo  
-    char *nome_arquivo = "imagem.txt";
+    char *nome_arquivo = "imagem.txt"; //variavel que possui o nome do arquivo que carega o arquivo com o logo, autores etc
     FILE *impArq = NULL;
  
+    //tratativa de quando o arquivo não for encontrado ou ser nulo
     if((impArq = fopen(nome_arquivo,"r")) == NULL)
     {
         fprintf(stderr,"erro ao abrir %s\n",nome_arquivo);
@@ -52,11 +53,12 @@ int main() {
                }
     }                       
     
+    fflush(stdin);
+      
     //Arestas da Arvore Geradora de Custo Minimo
     printf("\nAs arestas da AGCM sao:\n");
-    nra=1;
     while(nra<nrv){
-         for(i=1;i<=nrv;i++){
+         for(i=1,min=999;i<=nrv;i++){
             for(j=1;j<=nrv;j++){
                if(m[i][j] < min){
                   min = m[i][j];
@@ -79,10 +81,11 @@ int main() {
      
 	system("pause");
 }
-
+   //impressao do logo
     void imprimir_logo(FILE *impArq){
     
     char read_string[TAM_MAXIMO];
+    
     
     while(fgets(read_string,sizeof(read_string),impArq) != NULL)
         printf("%s",read_string);
@@ -94,7 +97,7 @@ int main() {
         i=pai[i];
         return i;
     }
-
+    //promove a união das árvores cujos chefes são x e y respectivamente.
     int unioon(int i,int j){
 	if(i!=j){
 		pai[j]=i;
